@@ -1,3 +1,4 @@
+from dataprocessor.imageprocessor import ImageProcessor
 import numpy as np
 
 class MaskOperator:
@@ -35,17 +36,18 @@ class MaskOperator:
         elif mask == "cloud":
             mask_label = (label[:,:,1] == 1)
         elif mask == "shadow":
-            mask_label == (label[:,:,2] == 1)
+            mask_label = (label[:,:,2] == 1)
         
-        img = img.astype(float)
-        img[mask_label] = np.nan
+        img_array = img.astype(float)
+        img_array[mask_label] = np.nan
         
-        return img
+        return img_array
     
     @staticmethod
     def remv_background(img, label: np.array) -> np.array:
         mask_label = (label[:,:,0] == 1)
-        img = img.astype(float)
-        img[mask_label] = np.nan
         
-        return img
+        img_array = img.astype(float)
+        img_array[mask_label] = np.nan
+        
+        return img_array
